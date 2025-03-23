@@ -1,6 +1,19 @@
 import React, { useState } from 'react';
 import './App.css';
-import PropTypes, { string } from "prop-types";
+import PropTypes from "prop-types";
+
+import "dayjs/locale/lo";
+import dayjs from 'dayjs';
+import bhuddishtEra from 'dayjs/plugin/buddhistEra';
+import localizedFormat from 'dayjs/plugin/localizedFormat';
+
+
+dayjs.locale('lo');
+dayjs.extend(localizedFormat);
+dayjs.extend(bhuddishtEra);
+
+
+
 
 
 
@@ -8,7 +21,7 @@ const SelfIntroddution = ({ name = 'unknown', dateOfBirth, hobbies = [] }) => {
   return (
     <div>
       <h1>My name is : <span style={{ color: 'red' }}>{name}</span> </h1>
-      {dateOfBirth ? <h1> i was born on {dateOfBirth} </h1> : null}
+      {dateOfBirth ? <h1> i was born on {dayjs(dateOfBirth).format("D MMMM YYYY")} </h1> : null}
       {hobbies.length === 0 ? null :
         <div>
           <h1>My hobbies are : </h1>
