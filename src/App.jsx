@@ -1,7 +1,7 @@
-
+import React, { useState } from 'react';
 import './App.css';
 import PropTypes from "prop-types";
-import React from 'react'
+
 
 
 const SelfIntroddution = ({ name = 'unknown', dateOfBirth, hobbies = [] }) => {
@@ -27,16 +27,28 @@ SelfIntroddution.prototype = {
   name: PropTypes.string.isRequired,
   dateOfBirth: PropTypes.string,
   hobbies: PropTypes.array
-}
+};
 const Test = ({ children }) => {
   console.log(typeof children);
   return <div>{children}</div>;
 };
 function App() {
+  const [data, setData] = useState({ name: undefined });
+  const [name, setName] = useState("");
   return (
     <div className="App">
+      <label htmlFor="name">Name:</label>
+      <input id="name" type="text" value={name} onChange={(e) => setName(e.target.value)} />
+      <button
+        onClick={() => {
+          setData({ name });
+          setName("");
+        }}
+      >
+        Save</button>
+
       <SelfIntroddution
-        name="somphone"
+        name={data.name}
         dateOfBirth="2000 jun 26"
         hobbies={['coding', 'playing', 'sleeping']}
       />
