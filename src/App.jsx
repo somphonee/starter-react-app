@@ -1,9 +1,13 @@
+
 import './App.css';
+import PropTypes from "prop-types";
+import React from 'react'
+
 
 const SelfIntroddution = ({ name = 'unknown', dateOfBirth, hobbies = [] }) => {
   return (
     <div>
-      <h1>My name is : {name} </h1>
+      <h1>My name is : <span style={{ color: 'red' }}>{name}</span> </h1>
       {dateOfBirth ? <h1> i was born on {dateOfBirth} </h1> : null}
       {hobbies.length === 0 ? null :
         <div>
@@ -17,7 +21,13 @@ const SelfIntroddution = ({ name = 'unknown', dateOfBirth, hobbies = [] }) => {
 
     </div>);
 };
+// <SelfIntroddution}
 
+SelfIntroddution.prototype = {
+  name: PropTypes.string.isRequired,
+  dateOfBirth: PropTypes.string,
+  hobbies: PropTypes.array
+}
 const Test = ({ children }) => {
   console.log(typeof children);
   return <div>{children}</div>;
