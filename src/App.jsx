@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import './App.css';
-import PropTypes from "prop-types";
+import PropTypes, { string } from "prop-types";
 
 
 
@@ -33,23 +33,28 @@ const Test = ({ children }) => {
   return <div>{children}</div>;
 };
 function App() {
-  const [data, setData] = useState({ name: undefined });
+  const [data, setData] = useState({ name: undefined, dateOfBirth: undefined });
   const [name, setName] = useState("");
+  const [dateOfBirth, setDateOfBirth] = useState("");
   return (
     <div className="App">
       <label htmlFor="name">Name:</label>
       <input id="name" type="text" value={name} onChange={(e) => setName(e.target.value)} />
+      <label htmlFor="Date Of Birth">Date Of Birth:</label>
+      <input id="Date Of Birth" type="date" pattern="mm/dd/yyyy" value={dateOfBirth} onChange={(e) => setDateOfBirth(e.target.value)} />
+
       <button
         onClick={() => {
-          setData({ name });
+          setData({ name, dateOfBirth });
           setName("");
+          setDateOfBirth("");
         }}
       >
         Save</button>
 
       <SelfIntroddution
         name={data.name}
-        dateOfBirth="2000 jun 26"
+        dateOfBirth={data.dateOfBirth}
         hobbies={['coding', 'playing', 'sleeping']}
       />
       <Test>123</Test>
