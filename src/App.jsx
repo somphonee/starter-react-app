@@ -76,17 +76,18 @@ function App() {
             <label htmlFor="hobbies">Hobbies: {index + 1}: </label>
             <input
               id={`hobby-${index}`}
-              type="text"
-              value={item} onChange={e => {
+              value={item}
+              onChange={e => {
                 const newValue = e.target.value;
                 // setHobbies(hobbies.map((hobby, hobbyIndex) => {
-                //   if (index === hobbyIndex)  {
+                //   if (index === hobbyIndex) {
                 //     return newValue;
                 //   }
                 //   return hobby;
                 // }));
 
-                const newHobbies = setHobbies(hobbies.map((hobby, hobbyIndex) => hobby === index ? newValue : hobby));
+                const newHobbies = hobbies.map((hobby, hobbyIndex) => hobbyIndex === index ? newValue : hobby);
+                console.log("newHobbies", newHobbies);
                 setHobbies(newHobbies);
               }}
             />
