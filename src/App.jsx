@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import "./App.css";
 import PropTypes from "prop-types";
+import "@picocss/pico";
 
 import "dayjs/locale/lo";
 import dayjs from "dayjs";
@@ -55,24 +56,29 @@ function App() {
   console.log(hobbies);
   return (
     <div className="App">
-      <label htmlFor="name">Name:</label>
-      <input
-        id="name"
-        type="text"
-        value={name}
-        onChange={(e) => setName(e.target.value)}
-      />
-      <label htmlFor="Date Of Birth">Date Of Birth:</label>
-      <input
-        id="Date Of Birth"
-        type="date"
-        pattern="mm/dd/yyyy"
-        value={dateOfBirth}
-        onChange={(e) => setDateOfBirth(e.target.value)}
-      />
-      <div>
+      <div style={{
+        display: "grid", gridTemplateColumns: "160px 1fr 48px",
+        gap: "0.5rem"
+      }}>
+        <label htmlFor="name">Name:</label>
+        <input
+          id="name"
+          type="text"
+          value={name}
+          onChange={(e) => setName(e.target.value)}
+          style={{ gridColumn: "span 2" }}
+        />
+        <label htmlFor="Date Of Birth">Date Of Birth:</label>
+        <input
+          id="Date Of Birth"
+          type="date"
+          pattern="mm/dd/yyyy"
+          value={dateOfBirth}
+          onChange={(e) => setDateOfBirth(e.target.value)}
+          style={{ gridColumn: "span 2" }}
+        />
         {hobbies.map((item, index) => (
-          <div key={index}>
+          <div key={index} style={{ display: "contents" }}>
             <label htmlFor="hobbies">Hobbies: {index + 1}: </label>
             <input
               id={`hobby-${index}`}
@@ -99,22 +105,25 @@ function App() {
             >-</button>
           </div>
         ))}
-        <button onClick={() => setHobbies([...hobbies, ""])}>Add anothor hobby</button>
+        <button onClick={() => setHobbies([...hobbies, ""])}
+          style={{ gridColumn: "2", width: "max-content" }}
+        >Add anothor hobby</button>
+        <button
+          onClick={() => {
+            setData({ name, dateOfBirth });
+            setName("");
+            setDateOfBirth("");
+          }}
+          style={{ gridColumn: "1 / spam 3", backgroundColor: "lightblue" }}
+        >
+          Save
+        </button>
       </div>
-      <button
-        onClick={() => {
-          setData({ name, dateOfBirth });
-          setName("");
-          setDateOfBirth("");
-        }}
-      >
-        Save
-      </button>
 
       <SelfIntroddution
         name={data.name}
         dateOfBirth={data.dateOfBirth}
-        hobbies={["coding", "playing", "sleeping"]}
+        hobbies={["codi ng", "playing", "sleeping"]}
       />
       <Test>123</Test>
     </div>
