@@ -91,11 +91,16 @@ function App() {
                 setHobbies(newHobbies);
               }}
             />
+            <button
+              onClick={() => {
+                const newHobbies = hobbies.filter((_, hobbyIndex) => hobbyIndex !== index);
+                setHobbies(newHobbies);
+              }}
+            >-</button>
           </div>
         ))}
         <button onClick={() => setHobbies([...hobbies, ""])}>Add anothor hobby</button>
       </div>
-
       <button
         onClick={() => {
           setData({ name, dateOfBirth });
