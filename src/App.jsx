@@ -12,15 +12,15 @@ dayjs.locale("lo");
 dayjs.extend(localizedFormat);
 dayjs.extend(bhuddishtEra);
 
-const SelfIntroddution = ({ name = "unknown", dateOfBirth, hobbies = [] }) => {
+const SelfIntroddution = ({ name = "unknown", dateOfBirth = null, hobbies = [] }) => {
   return (
     <div>
       <h1>
         My name is : <span style={{ color: "red" }}>{name}</span>{" "}
       </h1>
-      {dateOfBirth ? (
-        <h1> i was born on {dayjs(dateOfBirth).format("D MMMM YYYY")} </h1>
-      ) : null}
+   
+        <h1> i was born on:  <span>{dayjs(dateOfBirth).format("D MMMM YYYY")}</span>{" "}</h1>
+
       {hobbies.length === 0 ? null : (
         <div>
           <h1>My hobbies are : </h1>
@@ -49,7 +49,7 @@ const Test = ({ children }) => {
   return <div>{children}</div>;
 };
 function App() {
-  const [data, setData] = useState({ name: undefined, dateOfBirth: undefined });
+  const [data, setData] = useState({ name: undefined, dateOfBirth: undefined, hobbies: [] });
   const [name, setName] = useState("");
   const [dateOfBirth, setDateOfBirth] = useState("");
   const [hobbies, setHobbies] = useState([""]);
@@ -57,8 +57,7 @@ function App() {
   return (
     <div className="App">
       <div style={{
-        display: "grid", gridTemplateColumns: "160px 1fr 48px",
-        gap: "0.5rem"
+        display: "grid", gridTemplateColumns: "160px 1fr 48px", gap: "0.5rem"
       }}>
         <label htmlFor="name">Name:</label>
         <input
@@ -85,13 +84,6 @@ function App() {
               value={item}
               onChange={e => {
                 const newValue = e.target.value;
-                // setHobbies(hobbies.map((hobby, hobbyIndex) => {
-                //   if (index === hobbyIndex) {
-                //     return newValue;
-                //   }
-                //   return hobby;
-                // }));
-
                 const newHobbies = hobbies.map((hobby, hobbyIndex) => hobbyIndex === index ? newValue : hobby);
                 console.log("newHobbies", newHobbies);
                 setHobbies(newHobbies);
@@ -110,9 +102,10 @@ function App() {
         >Add anothor hobby</button>
         <button
           onClick={() => {
-            setData({ name, dateOfBirth });
+            setData({ name, dateOfBirth , hobbies });
             setName("");
             setDateOfBirth("");
+            setHobbies([""]);
           }}
           style={{ gridColumn: "1 / spam 3", backgroundColor: "lightblue" }}
         >
@@ -123,9 +116,8 @@ function App() {
       <SelfIntroddution
         name={data.name}
         dateOfBirth={data.dateOfBirth}
-        hobbies={["codi ng", "playing", "sleeping"]}
+        hobbies={data.hobbies}
       />
-      <Test>123</Test>
     </div>
   );
 }
